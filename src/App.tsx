@@ -156,7 +156,7 @@ function App() {
         <div className={'bg-black flex justify-center'}>
             <div className={'w-full bg-black text-white h-screen font-bold flex flex-col max-w-xl'}>
 
-                <div className={'px-4 z-10'}>
+                <div className={'px-2 z-10'}>
 
                     <div className={'flex items-center space-x-2 pt-4'}>
                         <div className={'p-1 rounded-lg bg-[#1d2025]'}>
@@ -182,14 +182,13 @@ function App() {
                                         className={'progress-gradient w-full h-2 bg-[#43433b]/[0.6] rounded-full'}
                                         style={{width: `${calculateProgress()}%`}}
                                     >
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div
-                            className={'flex items-center w-2/3 border-2 border-[#43433b] rounded-full px-4 py-[2px] bg-[#43433b]/[0.6] max-w-64'}>
-                            <img src={binanceLogo} alt='Exchange' className={'w-8 h-8'}/>
+                            className={'flex items-center w-2/3 border-2 border-[#43433b] rounded-full px-4 py-[2px] bg-[#43433b]/[0.6] max-w-60'}>
+                            <img src={binanceLogo} alt='Exchange' className={'w-6 h-6'}/>
                             <div className={'flex-1 text-center'}>
                                 <p className={'text-xs text-[#85827d] font-medium'}>
                                     Profit per hour
