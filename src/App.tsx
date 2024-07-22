@@ -13,7 +13,6 @@ import Friends from "./icons/Friends.tsx";
 import Mine from "./icons/Mine.tsx";
 import Coins from "./icons/Coins.tsx";
 import {hamsterCoin} from "./images";
-import {c} from "vite/dist/node/types.d-aGj9QkWt";
 
 function App() {
 
