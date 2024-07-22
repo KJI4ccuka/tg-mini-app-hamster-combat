@@ -1,6 +1,6 @@
 import './App.css'
 import Hamster from "./icons/Hamster.tsx";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Info from "./icons/Info.tsx";
 import Settings from "./icons/Settings.tsx";
 import dollarCoin from './images/dollar-coin.png'
@@ -12,7 +12,7 @@ import mainCharacter from "./images/main-character.png";
 import Friends from "./icons/Friends.tsx";
 import Mine from "./icons/Mine.tsx";
 import Coins from "./icons/Coins.tsx";
-import {hamsterCoin} from "./images";
+import hamsterCoin from "./images/hamster-coin.png";
 
 function App() {
 
@@ -42,7 +42,7 @@ function App() {
         1000000000,//Lord
     ]
 
-    const [levelIndex, setLevelIndex] = useState(6)
+    const [levelIndex, setLevelIndex] = useState(0)
     const [points, setPoints] = useState(22749365)
     const [clicks, setClicks] = useState<{ id: number, x: number, y: number } []>([])
     const pointsToAdd = 11
@@ -52,10 +52,10 @@ function App() {
     const [dailyCipherTimeLeft, setDailyCipherTimeLeft] = useState('')
     const [dailyComboTimeLeft, setDailyComboTimeLeft] = useState('')
 
-    const calculateTimeLeft = (targerHour: number) => {
+    const calculateTimeLeft = (targetHour: number) => {
         const now = new Date()
         const target = new Date(now)
-        target.setUTCHours(targerHour, 0, 0, 0)
+        target.setUTCHours(targetHour, 0, 0, 0)
 
         if (now.getUTCHours()) {
             target.setUTCDate(target.getUTCDate() + 1)
@@ -103,6 +103,35 @@ function App() {
         return () => clearInterval(interval)
     }, []);
 
+    useEffect(() => {
+        const updateLevelIndex = () => {
+            let newLevelIndex = levelIndex;
+
+            while (newLevelIndex < levelMinPoints.length - 1 && points >= levelMinPoints[newLevelIndex + 1]) {
+                newLevelIndex++;
+            }
+
+            while (newLevelIndex > 0 && points < levelMinPoints[newLevelIndex]) {
+                newLevelIndex--;
+            }
+
+            if (newLevelIndex !== levelIndex) {
+                setLevelIndex(newLevelIndex);
+            }
+        };
+
+        updateLevelIndex();
+    }, [points]);
+
+    useEffect(() => {
+        const pointsPerSecond = Math.floor(profitPerHour / 3600)
+        const  interval = setInterval(() => {
+            setPoints(prevPoints => prevPoints + pointsPerSecond)
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }, [profitPerHour]);
+
     const calculateProgress = () => {
         if (levelIndex >= levelNames.length - 1) {
             return 100
@@ -122,15 +151,6 @@ function App() {
 
         return `+${profit}`
     }
-
-    useEffect(() => {
-        const pointsPerSecond = Math.floor(profitPerHour / 3600)
-        const  interval = setInterval(() => {
-            setPoints(prevPoints => prevPoints + pointsPerSecond)
-        }, 1000)
-
-        return () => clearInterval(interval)
-    }, [profitPerHour]);
 
     return (
         <div className={'bg-black flex justify-center'}>
@@ -276,8 +296,6 @@ function App() {
                     {pointsToAdd}
                 </div>
             ))}
-
-
         </div>
     )
 }
