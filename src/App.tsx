@@ -43,7 +43,7 @@ function App() {
     ]
 
     const [levelIndex, setLevelIndex] = useState(0)
-    const [points, setPoints] = useState(59000000)
+    const [points, setPoints] = useState(1000000000)
     const [clicks, setClicks] = useState<{ id: number, x: number, y: number } []>([])
     const pointsToAdd = 11
     const profitPerHour = 126420
